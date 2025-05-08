@@ -1,2 +1,6 @@
 debug_out/
 Manifest.toml
+
+ros/build/
+ros/install/
+ros/log/
