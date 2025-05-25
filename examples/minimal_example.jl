@@ -2,7 +2,7 @@ using iLQGames
 import iLQGames: dx
 
 # parametes: number of states, number of inputs, sampling time, horizon
-nx, nu, ΔT, game_horizon = 4, 2, 0.1, 200
+nx, nu, ΔT, game_horizon = 4, 2, 0.1, 20
 
 # setup the dynamics
 struct Unicycle <: ControlSystem{ΔT,nx,nu} end
@@ -24,10 +24,13 @@ g = GeneralGame(game_horizon, player_inputs, dynamics, costs)
 solver = iLQSolver(g)
 x0 = SVector(1, 1, 0, 0.5)
 converged, trajectory, strategies = solve(g, solver, x0)
+# println("Converged: ", converged)
+println("trajectory: ", trajectory.x[2])
+# println("strategies: ", strategies[1])
 
 # animate the resulting trajectory. Use the `plot_traj` call without @animated to
 # get a static plot instead.
 
 # for visualization, we need to state which state indices correspond to px and py
-position_indices = tuple(SVector(1,2))
-plot_traj(trajectory, position_indices, [:red, :green], player_inputs)
+# position_indices = tuple(SVector(1,2))
+# plot_traj(trajectory, position_indices, [:red, :green], player_inputs)
